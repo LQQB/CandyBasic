@@ -4,5 +4,7 @@
 
 ### 后端
 - SpringBoot
-- MyBatis|MyBatis generator(数据库)
+- MyBatis(数据库)
+- MyBatis generator（代码生成插件）
 - thymeleaf(模板引擎)
+- 
