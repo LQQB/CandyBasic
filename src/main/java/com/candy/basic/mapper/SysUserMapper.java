@@ -1,6 +1,8 @@
 package com.candy.basic.mapper;
 
 import com.candy.basic.entity.SysUser;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface SysUserMapper {
@@ -43,4 +45,7 @@ public interface SysUserMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(SysUser record);
+
+
+    SysUser findUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 }

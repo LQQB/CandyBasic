@@ -65,4 +65,8 @@
     select user_id, create_date, update_date, mobile_no, `password`, nick_name, gender
     from sysuser
   </select>
+    <select id="findUsernameAndPassword" resultMap="BaseResultMap">
+        select user_id, create_date, update_date, mobile_no, `password`, nick_name, gender
+        from sysuser where mobile_no = #{username} and `password` = #{password}
+    </select>
 </mapper>

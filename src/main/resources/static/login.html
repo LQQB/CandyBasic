@@ -169,14 +169,14 @@
                 contentType:"application/json;charset=utf-8",
                 url:"/user/login",
                 data:JSON.stringify({
-                    "telphone":telphone,
+                    "mobileNo":telphone,
                     "password":password
                 }),
                 success:function(data){
-                    if(data.status == "success"){
+                    if(data.code == 8) {
                         window.location.href="/static/index.html";
                     }else{
-                        alert("请求失败,原因为"+data.data.errMsg);
+                        alert("请求失败,原因为"+data.data.msg);
                     }
                 },
                 error:function(data){

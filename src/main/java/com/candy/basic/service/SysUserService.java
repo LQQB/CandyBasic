@@ -32,6 +32,8 @@ public class SysUserService {
     @Resource
     private SysUserMapper sysUserMapper;
 
+
+
     public SysUserForm getId(Long id) {
         SysUser sysUser = Optional.ofNullable(sysUserMapper.selectByPrimaryKey(id))
                 .orElseThrow(() -> new BusinessException(CbMsgEnum.NO_OBJECT_FOUND));
@@ -45,10 +47,11 @@ public class SysUserService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public SysUserForm register(SysRegForm sysRegForm) {
+    public void register(SysRegForm sysRegForm) {
         SysUser sysUser = CBBeanUtils.beanToForm(sysRegForm, SysUser.class);
         sysUser.setCreateDate(new Date());
         sysUser.setUpdateDate(new Date());
+        // sha 256 加密
         sysUser.setPassword(CBSHAUtils.getSHA256StrJava(sysUser.getPassword()));
         try {
             sysUserMapper.insert(sysUser);
@@ -56,6 +59,19 @@ public class SysUserService {
             throw new BusinessException(CbMsgEnum.REGISTER_DUP_FAIL);
         }
 
-        return getId(sysUser.getUserId());
     }
+
+    /**
+     * 登录
+     * @param username
+     * @param password
+     */
+    public SysUserForm login(String username, String password) {
+        SysUser sysUser = sysUserMapper.findUsernameAndPassword(username, CBSHAUtils.getSHA256StrJava(password));
+        if(sysUser == null) {
+            throw new BusinessException(CbMsgEnum.LOGIN_FAIL);
+        }
+        return CBBeanUtils.beanToForm(sysUser, SysUserForm.class);
+    }
+
 }
