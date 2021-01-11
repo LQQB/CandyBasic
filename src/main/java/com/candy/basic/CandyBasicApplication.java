@@ -7,6 +7,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @SpringBootApplication(scanBasePackages = "com.candy.basic")
 @MapperScan("com.candy.basic.mapper")
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class CandyBasicApplication {
 
 	public static void main(String[] args) {

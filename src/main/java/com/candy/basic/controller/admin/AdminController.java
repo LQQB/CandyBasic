@@ -1,5 +1,6 @@
 package com.candy.basic.controller.admin;
 
+import com.candy.basic.common.AdminPermission;
 import com.candy.basic.common.BusinessException;
 import com.candy.basic.enums.CbMsgEnum;
 import com.candy.basic.utils.CBSHAUtils;
@@ -33,7 +34,7 @@ public class AdminController {
     public final static String CURRENT_SESSION_ADMIN = "current_session_admin";
 
 
-
+    @AdminPermission
     @RequestMapping("/admin/admin/index")
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("/admin/admin/index");
@@ -45,6 +46,7 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView("/admin/admin/login");
         return modelAndView;
     }
+
 
     @RequestMapping("/admin/admin/login")
     public String login(String email, String password) {

@@ -6,12 +6,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @Classname 忽略校验注解
+ * @Classname 校验注解
  * @Description
  * @Author liqb
  * @Date 2021/1/7 0:03
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface IgnorePermission {
+public @interface AdminPermission {
+
+    String produceType() default "text/html";
+
 }
